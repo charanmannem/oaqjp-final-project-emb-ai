@@ -25,6 +25,9 @@ def emotion_detector_route():
 
     response = emotion_detector(text_to_analyze)
 
+    if response["dominant_emotion"] is None:
+        return "Invalid text! Please try again!"
+
     return (
         f"For the given statement, the system response is "
         f"'anger': {response['anger']}, "
@@ -35,7 +38,6 @@ def emotion_detector_route():
         f"The dominant emotion is "
         f"{response['dominant_emotion']}."
     )
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
