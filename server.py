@@ -1,6 +1,8 @@
-from flask import Flask
-from flask import render_template
-from flask import request
+"""
+Emotion Detection Flask Application
+"""
+
+from flask import Flask, render_template, request
 
 from EmotionDetection import emotion_detector
 
@@ -10,7 +12,7 @@ app = Flask(__name__)
 @app.route("/")
 def render_index_page():
     """
-    Render the main page.
+    Render the main application page.
     """
     return render_template("index.html")
 
@@ -18,7 +20,7 @@ def render_index_page():
 @app.route("/emotionDetector")
 def emotion_detector_route():
     """
-    Analyze emotions from user text.
+    Analyze text and return emotion information.
     """
 
     text_to_analyze = request.args.get("textToAnalyze")
@@ -38,6 +40,7 @@ def emotion_detector_route():
         f"The dominant emotion is "
         f"{response['dominant_emotion']}."
     )
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
